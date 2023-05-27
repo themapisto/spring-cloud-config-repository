@@ -18,6 +18,12 @@ spring:
           uri: http://gateway.taskoo.net
           predicates:
             - Path=/gateway/**
+        - id: test-service
+          predicates:
+            - Path=/first-service/**
+          uri: lb://SERVICE1
+          filters:
+            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
 
 eureka:
   instance:
